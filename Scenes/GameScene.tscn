@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://pgsuqh5p5dyr"]
+
+[ext_resource type="PackedScene" uid="uid://c1e6ihuywamad" path="res://Prefabs/Player/player.tscn" id="1_qjuyk"]
+[ext_resource type="PackedScene" uid="uid://mqnqjbm5fajh" path="res://Prefabs/Environments/Object.tscn" id="2_hiy3m"]
+
+[node name="GameScene" type="Node2D"]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1146.0
+offset_bottom = 646.0
+
+[node name="Player" parent="." instance=ExtResource("1_qjuyk")]
+position = Vector2(464, 328)
+
+[node name="Object" parent="." instance=ExtResource("2_hiy3m")]
+position = Vector2(223, 458)
+
+[node name="Object2" parent="." instance=ExtResource("2_hiy3m")]
+position = Vector2(971, 199)
+
+[node name="Object3" parent="." instance=ExtResource("2_hiy3m")]
+position = Vector2(208, 127)
