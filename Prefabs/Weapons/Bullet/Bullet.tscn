@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://duq27ernpx2mq"]
+
+[ext_resource type="Texture2D" uid="uid://bbqcgcys3cx8w" path="res://icon.svg" id="1_sfxf8"]
+[ext_resource type="Script" path="res://Prefabs/Weapons/Bullet/Bullet.gd" id="1_srnyj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do24v"]
+radius = 15.0
+
+[node name="Bullet" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_srnyj")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-15, 1.19209e-07)
+scale = Vector2(0.408203, 0.123047)
+texture = ExtResource("1_sfxf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_do24v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
