@@ -1,17 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://pgsuqh5p5dyr"]
+[gd_scene load_steps=5 format=3 uid="uid://pgsuqh5p5dyr"]
 
+[ext_resource type="Script" path="res://Scenes/gameScene.gd" id="1_fj088"]
 [ext_resource type="PackedScene" uid="uid://c1e6ihuywamad" path="res://Prefabs/Player/player.tscn" id="1_qjuyk"]
 [ext_resource type="PackedScene" uid="uid://mqnqjbm5fajh" path="res://Prefabs/Environments/Object.tscn" id="2_hiy3m"]
 
+[sub_resource type="Curve2D" id="Curve2D_r5fks"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1300, -179, 0, 0, 0, 0, 1303, 752, 0, 0, 0, 0, -164, 752, 0, 0, 0, 0, -164, -176, 0, 0, 0, 0, 1300, -179)
+}
+point_count = 5
+
 [node name="GameScene" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_fj088")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
 offset_right = 1146.0
 offset_bottom = 646.0
 
 [node name="Player" parent="." instance=ExtResource("1_qjuyk")]
 position = Vector2(464, 328)
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-464, -328)
+curve = SubResource("Curve2D_r5fks")
+
+[node name="ZombiePathFollow" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(1300, -179)
+rotation = 1.56757
 
 [node name="Object" parent="." instance=ExtResource("2_hiy3m")]
 position = Vector2(223, 458)
@@ -21,3 +41,37 @@ position = Vector2(971, 199)
 
 [node name="Object3" parent="." instance=ExtResource("2_hiy3m")]
 position = Vector2(208, 127)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.843137)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
