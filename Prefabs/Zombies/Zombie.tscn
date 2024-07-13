@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbocgg8g6hc83"]
+
+[ext_resource type="Script" path="res://Prefabs/Zombies/Zombie.gd" id="1_hpi0y"]
+[ext_resource type="Texture2D" uid="uid://bbqcgcys3cx8w" path="res://icon.svg" id="1_vvjkx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ifx0"]
+radius = 30.0666
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_hpi0y")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.396078, 0.121569, 0.156863, 1)
+position = Vector2(4.76837e-07, -43)
+scale = Vector2(0.476563, 0.671875)
+texture = ExtResource("1_vvjkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -31)
+shape = SubResource("CircleShape2D_3ifx0")
